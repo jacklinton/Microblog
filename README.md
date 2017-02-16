@@ -10,6 +10,9 @@ The properties of this blog that I will attempt to implement may include the fol
 	- encryption of messages based on groups using javascript libraries
 	- hiding the encrypted messages in the randomly generated meme images with steganographic .js libraries
 - encrypted and hidden messages can be revealed by people in their respective groups
+- all encryption and decryption will happen at the client
+	- no openly encrypted data will be transferred to or from the server/client
+	-nor will there be any openly encrypted data or keys stored in the database
 - users can sort messages to only show the ones in their group
 - guest users will still be able to post their favorite memes
 - make the site and its hidden data as secure and as possible
