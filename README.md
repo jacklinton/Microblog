@@ -11,6 +11,8 @@ The properties of this blog that I will attempt to implement may include the fol
 	- hiding the encrypted messages in the randomly generated meme images with steganographic .js libraries
 - encrypted and hidden messages can be revealed by people in their respective groups
 - users can sort messages to only show the ones in their group
+- all encrypted material will be concealed on the server
+- all encryption/decryption will be client based and no open encrypted data will be transmitted to or from the server
 - guest users will still be able to post their favorite memes
 - make the site and its hidden data as secure and as possible
 - the nature of the site as a place for sending hidden messages will be as ambiguous as possible
