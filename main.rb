@@ -12,8 +12,12 @@ Sinatra::register Gon::Sinatra::Rabl
 
 
 
-set :database, "/////"
+# set :database, "/////"
 
 get "/" do 
+	render :rabl, :foo, :format => "json"
+
+
+	erb :index
 
 end
