@@ -74,14 +74,14 @@ post "/log/out" do
 end
 
 #Viewing a user's profile
-get "/users/view/:id"
+get "/users/view/:id" do
 	profile =  User.find(:id)
 
 	redirect "/users/profile/#{profile.username}"
 end
 
 #Editing a user's profile
-get "users/profile/edit/:username"
+get "users/profile/edit/:username" do
 	profile = User.find(:username)
 
 	if session[:user_id] == profile.user_id
