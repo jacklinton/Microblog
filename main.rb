@@ -1,6 +1,6 @@
 require "sinatra"
 require "sinatra/activerecord"
-require "./models"
+
 require "gon-sinatra"
 require 'rabl'
 require 'active_support/core_ext'
@@ -13,6 +13,7 @@ Sinatra::register Gon::Sinatra::Rabl
 
 
 set :database, "sqlite3:microblog.sqlite3"
+require "./models"
 enable :sessions
 
 get "/" do 

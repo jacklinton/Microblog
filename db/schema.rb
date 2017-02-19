@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219203159) do
+ActiveRecord::Schema.define(version: 20170219230409) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170219203159) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "group", force: :cascade do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.binary   "avatar"
     t.integer  "administrator_id"
@@ -41,9 +41,10 @@ ActiveRecord::Schema.define(version: 20170219203159) do
     t.string   "username"
     t.string   "password"
     t.binary   "avatar"
-    t.string   "group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
+    t.string   "group_name"
   end
 
 end
