@@ -1,5 +1,8 @@
 The purpose of this activity is the create a microblog running from a Sinatra based sql server.
 
+“…the dreaded Isla de Muerta. It’s an island that cannot be found, except by those who already know where it is.” —Jack Sparrow 
+
+
 The key concept is “hiding in plain sight.”
 
 The properties of this blog that I will attempt to implement may include the following:
@@ -15,5 +18,6 @@ The properties of this blog that I will attempt to implement may include the fol
 - all encryption/decryption will be done on the client end, and no openly encrypted data will be transmitted to or from the server
 - guest users will still be able to post their favorite memes
 - make the site and its hidden data as secure and as possible
+- alter meme images before deploying to create “white noise” for added uniqueness and to additionally conceal the hidden data
 - the nature of the site as a place for sending hidden messages will be as ambiguous as possible
 - any other features that will add to the safety and pseudonymity of the users who are passing messages to each other.
