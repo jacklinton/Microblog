@@ -17,7 +17,10 @@
     <link href="/bootstrap-3.3.7/docs/examples/blog/blog.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet"> 
+    <link href="/bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
  </head>
 
   <body>
@@ -32,14 +35,14 @@
 
     <div class="container">
 
-      <form class="form-signin" action="/users/new" type="POST">
+      <form class="form-signin" action="/users/new" method="POST">
         <h2 class="form-signin-heading">Register Your New Account</h2>
-        <label for="username" class="sr-only">Pick A Username</label>
-        <input type="text" id="username" class="form-control" placeholder="username" required autofocus>
-      	<label for="password" class="sr-only">Password (Case Sensitive)</label>
-        <input type="text" id="password" class="form-control" placeholder="password" required autofocus>
-        <label for="group_name" class="sr-only">Group(Leave Blank)</label>
-        <input type="text" id="group_name" class="form-control" placeholder="group name (optional)">
+        <label for="username">Pick A Username</label>
+        <input type="text" id="username"placeholder="username">
+      	<label for="password">Password (Case Sensitive)</label>
+        <input type="text" id="password"placeholder="password">
+        <label for="group_name">Group(Leave Blank)</label>
+        <input type="text" id="group_name" placeholder="group name (optional)">
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>

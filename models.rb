@@ -2,11 +2,6 @@ class User < ActiveRecord::Base
 	has_many :posts
 	has_many :comments, through: :posts
 	belongs_to :group
-
-	def self.group_id
-		Group.where(name: User.group_name).first
-		
-	end
 end
 
 class Post < ActiveRecord::Base

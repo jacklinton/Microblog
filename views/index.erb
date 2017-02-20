@@ -16,6 +16,8 @@
 
     <!-- Custom styles for this template -->
     <link href="/bootstrap-3.3.7/docs/examples/blog/blog.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -24,7 +26,7 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
-          <% if session[:id] %>
+          <% if session[:user_id] %>
             <a class="blog-nav-item" href="/users/profile/">View <%= @current_user.username%>'s Profile</a>
             <a class="blog-nav-item" href="#">Make New Post</a>
             <% if @groupy %>

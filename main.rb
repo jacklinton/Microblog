@@ -1,11 +1,12 @@
 require "sinatra"
 require "sinatra/activerecord"
-
+require "sinatra/flash"
 require "gon-sinatra"
 require 'rabl'
 require 'active_support/core_ext'
 require 'active_support/inflector'
 require 'builder'
+require "./models"
 
 Rabl.register!
 Sinatra::register Gon::Sinatra::Rabl
@@ -13,7 +14,7 @@ Sinatra::register Gon::Sinatra::Rabl
 
 
 set :database, "sqlite3:microblog.sqlite3"
-require "./models"
+
 enable :sessions
 
 def page_stuff
@@ -22,14 +23,16 @@ def page_stuff
 	@users = User.all
 	@groups = Group.all
 
-	if session[:id]
-		@current_user = User.find(session[:id]
+	if session[:user_id]
+		@current_user = User.find(session[:user_id])
+		
+		if @current_user.group_id
+			@groupie = true
+			@gname = Group.find(@current_user.group_id)
+		end
+
 	end
 
-	if @current_user.group_id
-		@groupie = true
-		@gname = Group.find(@current_user.group_id).
-	end
 end
 
 get "/" do 
@@ -38,14 +41,17 @@ get "/" do
 	@users = User.all
 	@groups = Group.all
 
-	if session[:id]
-		@current_user = User.find(session[:id]
+	if session[:user_id]
+		@current_user = User.find(session[:user_id])
+		
+		if @current_user.group_id
+		@groupie = true
+		@gname = Group.find(@current_user.group_id)
+		end
+
 	end
 
-	if @current_user.group_id
-		@groupie = true
-		@gname = Group.find(@current_user.group_id).
-	end
+	
 	erb :index
 
 end
@@ -56,8 +62,8 @@ end
 #Go to home page
 
 #View this user's profile
-get "users/profile/"
-
+get "/users/profile" do
+	page_stuff
 
 	erb :"users/user"
 end
@@ -74,6 +80,7 @@ get "/users/new" do
 
 	erb :"register/registration"
 end
+
 post "/users/new" do
 	user = User.create
 
@@ -96,21 +103,26 @@ post "/users/new" do
 end
 
 #Logging in a user that already exists
-get "/sign_in" do
-	erb :sign_in
+get "/sign/in" do
+
+
+
+	erb :"users/signin"
 end
 
-post "/users/login" do
-	
-	user = User.where(email: params[:email]).first
+post "/log/in" do
 
+	user = User.where(username: params[:username]).first
+	
 	if user.password == params[:password]
 		flash[:notice] = "You are now logged in."
 		session[:user_id] = user.id
+		redirect "/users/profile"
 	else
 		flash[:notice] = "Incorrect login credentials."
 	end
-	redirect "/"
+
+	redirect "/sign/in"
 end
 
 #Logging out a user
@@ -128,11 +140,11 @@ get "/users/view/:id" do
 end
 
 #Editing a user's profile
-get "users/profile/edit/:username" do
+get "users/edit/" do
 	profile = User.find(:username)
 
 	if session[:user_id] == profile.user_id
-		redirect "users/frofile/edit/#{profile.username}"
+		redirect "users/profile/edit/#{profile.username}"
 	else
 		flash[:notice] = "You only have permission to delete your own posts."
 	end
@@ -181,6 +193,7 @@ end
 
 #Deleting a post
 get "/posts/delete/:id" do
+	session.clear
 	post = Post.find(params[:id])
 
 	if session[:user_id] == post.user_id
