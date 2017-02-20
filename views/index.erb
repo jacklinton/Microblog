@@ -23,11 +23,17 @@
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
+          <a class="blog-nav-item active" href="/">Home</a>
+          <% if session[:id] %>
+            <a class="blog-nav-item" href="/users/profile/">View <%= @current_user.username%>'s Profile</a>
+            <a class="blog-nav-item" href="#">Make New Post</a>
+            <% if @groupy %>
+            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% end %>
+          <% else %>
+            <a class="blog-nav-item" href="/sign/in">Sign-In</a>
+            <a class="blog-nav-item" href="/users/new">Register New Account</a>
+          <% end %>
         </nav>
       </div>
     </div>
@@ -35,10 +41,10 @@
     <div class="container">
 
       <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+        <h1 class="blog-title">MEME-A-DAY</h1>
+        <p class="lead blog-description">Post your favorite meme of the day to the feed!</p>
       </div>
-
+      <%= flash[:notice] if flash[:notice]  %>
       <div class="row">
 
         <div class="col-sm-8 blog-main">

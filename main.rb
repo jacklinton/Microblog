@@ -16,10 +16,36 @@ set :database, "sqlite3:microblog.sqlite3"
 require "./models"
 enable :sessions
 
+def page_stuff
+	render :rabl, :foo, :format => "json"
+	@posts = Post.all
+	@users = User.all
+	@groups = Group.all
+
+	if session[:id]
+		@current_user = User.find(session[:id]
+	end
+
+	if @current_user.group_id
+		@groupie = true
+		@gname = Group.find(@current_user.group_id).
+	end
+end
+
 get "/" do 
 	render :rabl, :foo, :format => "json"
 	@posts = Post.all
+	@users = User.all
+	@groups = Group.all
 
+	if session[:id]
+		@current_user = User.find(session[:id]
+	end
+
+	if @current_user.group_id
+		@groupie = true
+		@gname = Group.find(@current_user.group_id).
+	end
 	erb :index
 
 end
@@ -29,8 +55,12 @@ end
 ##Navigation actions
 #Go to home page
 
-#View user profile
+#View this user's profile
+get "users/profile/"
 
+
+	erb :"users/user"
+end
 #View group profile
 
 
@@ -39,13 +69,29 @@ end
 
 ## User related actions
 # Creating a new user
+get "/users/new" do
+
+
+	erb :"register/registration"
+end
 post "/users/new" do
-	user = User.create(fname: params["fname"], lname: params["lname"], email: params["email"], password: params["password"])
+	user = User.create
+
+	user.username = params[:username]
+	user.password = params[:password]
+	user.group_name = params[:group_name]
+	
+	if params[:group_name]
+		user.group_id = Group.find(params[:group_name])
+	end
+
+	user.save
 
 	session[:user_id] = user.id
 
 	flash[:notice] = "You are now signed in with a new account!"
-
+	flash[:get_started] = "You can start by making your first post at the Make New Post link in the menu bar abive."
+	
 	redirect "/"
 end
 
