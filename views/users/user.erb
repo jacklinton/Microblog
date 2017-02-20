@@ -49,7 +49,7 @@
         <h1 class="profile-title"><%= @current_user.username%></h1>
         <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
       </div>
-      <form class="form-signin" action="/users/edit" type="POST">
+      <form class="form-signin" action="/users/edit" method="POST">
         <h2 class="form-signin-heading">Edit Account Details</h2>
         <label for="username" class="sr-only">Pick A Username</label>
         <input type="text" id="username" class="form-control" placeholder="<%= @current_user.username%>" required autofocus>

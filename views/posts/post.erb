@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/bootstrap-3.3.7/docs/favicon.ico">
+
+    <title>Account Profile</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/bootstrap-3.3.7/docs/examples/blog/blog.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/steganography.js"></script>
+ </head>
+
+  <body>
+
+  	<div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="/">Home</a>
+          <% @current_user = User.find(session[:user_id]) %>
+          <% if session[:user_id] %>
+            <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
+            <a class="blog-nav-item" href="#">Make New Post</a>
+            <% if @groupy %>
+            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% end %>
+          <% else %>
+            <a class="blog-nav-item" href="/users/new">Register New Account</a>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class = "profile-main" id= "profile-main">
+        <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
+        <h1 class="profile-title"><%= @current_user.username%></h1>
+        <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
+      </div>
+      <form class="form-signin" action="/posts" method="POST">
+        <h2 class="form-signin-heading">Post a Meme</h2>
+        <label for="memeUrl" <!-- class="sr-only" -->>Link to the Meme</label>
+        <input type="text" id="memeUrl" name="memeUrl" class="form-control" placeholder="URL here" required autofocus>
+      	<label for="secret" <!-- class="sr-only" -->>Secret Message</label>
+        <input type="text" id="secret" name="secret" class="form-control" placeholder="secret" required autofocus>
+        <label for="title" class="sr-only">Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="title">
+        <label for="body" class="sr-only">Meme</label>
+        <input type="text" id="body" name="body" class="form-control" placeholder="post">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
+      <img id="memeImg">
+    </div> <!-- /container -->
+    
+    <script type="text/javascript" src="/scripts.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/bootstrap-3.3.7/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -126,7 +126,7 @@ post "/log/in" do
 end
 
 #Logging out a user
-post "/log/out" do
+get "/log/out" do
 	session.clear
 
 	redirect "/"
@@ -158,14 +158,18 @@ end
 
 ##Post related actions
 #Creating a new post
+get "/post/new" do
+
+	erb :"posts/post"
+end
 post "/posts" do
 	# or Post.create(title: params["title"], body: params["body"])
 
 
 	post = Post.new
 
-	post.title = params["title"]
-	post.body = params["body"]
+	post.title = params[:title]
+	post.meme = params[:body]
 	post.user_id = session[:user_id]
 
 	post.save
