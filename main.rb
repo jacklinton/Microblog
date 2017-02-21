@@ -27,7 +27,7 @@ def page_stuff
 		@current_user = User.find(session[:user_id])
 		
 		if @current_user.group_id
-			@groupie = 
+			@groupie = true
 			@gname = Group.where(id: @current_user.group_id).first
 		end
 
@@ -89,7 +89,7 @@ post "/users/new" do
 	user.password = params[:password]
 	user.group_name = params[:group_name]
 	
-	if params[:group_name] == nil
+	if params[:group_name]
 		group = Group.where(name: user.group_name).first
 		user.group_id = group.id
 	end
@@ -151,31 +151,29 @@ end
 
 post "/users/edit/username/:id" do
 	user = User.find(params[:id])
-	user.avatar = params[:avatar]
+	user.username = params[:username]
 	user.save
 	redirect "/users/profile"
 end
 
 post "/users/edit/password/:id" do
 	user = User.find(params[:id])
-	user.avatar = params[:avatar]
+	user.password = params[:password]
 	user.save
 	redirect "/users/profile"
 end
 
 post "/users/edit/group/:id" do
 	user = User.find(params[:id])
-	user.avatar = params[:avatar]
+	user.group_name = params[:group_name]
+	if params[:group_name]
+		group = Group.where(name: user.group_name).first
+		user.group_id = group.id
+	end
 	user.save
 	redirect "users/profile"
 end
 
-post "/users/edit/avatar/:id" do
-	user = User.find(params[:id])
-	user.avatar = params[:avatar]
-	user.save
-	redirect "users/profile"
-end
 
 ##Post related actions
 #Creating a new post
@@ -191,7 +189,7 @@ post "/posts" do
 	post = Post.new
 
 	post.title = params[:title]
-	
+
 	if params[:body] == nil
 		post.meme = params[:memeUrl]
 	else
@@ -208,6 +206,7 @@ end
 #Editing a post
 get '/posts/edit/:id' do
   @post = Post.find(params[:id])
+  page_stuff
 
   erb :"posts/post_view"
 end

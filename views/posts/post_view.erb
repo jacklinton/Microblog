@@ -29,15 +29,14 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
+          <% @current_user = User.find(session[:user_id]) %>
           <% if session[:user_id] %>
-            <a class="blog-nav-item" href="/users/profile">View <%= @current_user.username %>'s Profile</a>
+            <a class="blog-nav-item profile-title" href="/users/profile">View <%= @current_user.username%>'s Profile</a>
             <a class="blog-nav-item" href="/post/new">Make New Post</a>
-            <a class="blog-nav-item" href="/log/out">Sign Out</a>
-           
-              <a class="blog-nav-item" href="/group/profile"><%= @gname.name %> Group Page</a>
-            
+            <% if @groupy %>
+            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% end %>
           <% else %>
-            <a class="blog-nav-item" href="/sign/in">Sign-In</a>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
           <% end %>
         </nav>
@@ -57,8 +56,9 @@
               <h1 class="post-title">Post by <%= @post.user.username%></h1>
               <h1 class="post-title">Title: <%= @post.title%></h1>
               <img class ="" id = "image" src="<%= @post.meme %>">
-
-              <%if session[:user_id] and Post.group_id == User.group_id %>
+              <br>
+              <br>
+              <%if @post.user.group_id == @current_user.group_id %>
                 <h1 id = "secret">!</h1>
                 <script type="text/javascript"> var image = document.getElementById("image").src; document.getElementById("secret").innerHTML = "Secret message: " + steg.decode(image);</script>
               <% end %>
@@ -72,14 +72,15 @@
               <label for="memeUrl" class="sr-only">Link to the Meme</label>
               <input type="text" id="memeUrl" name="memeUrl" class="form-control" placeholder="URL here" required autofocus>
               <% if @post.user.group_id %>
-            	 <label for="secret" class="sr-only">Secret Message</label>
-              <% end %> 
+            	 <label for="secret" class="sr-only">Secret Message</label> 
               <input type="text" id="secret" name="secret" class="form-control" placeholder="secret" required autofocus>
+              <% end %>
               <label for="title" class="sr-only">Title</label>
               <input type="text" id="title" name="title" class="form-control" placeholder="title">
+              <% if @post.user.group_id %>
               <label for="body" class="sr-only">Meme</label>
               <input type="text" id="body" name="body" class="form-control" placeholder="post">
-
+              <% end %> 
               <button class="btn btn-lg btn-primary btn-block" type="submit">Edit Post</button>
             </form>
             <a href="/posts/delete/<%= @post.id %>" ><button class="btn btn-lg btn-primary btn-block" type="button">delete</button></a> 

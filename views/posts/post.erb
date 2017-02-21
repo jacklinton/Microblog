@@ -61,9 +61,10 @@
         <% end %>
         <label for="title" class="sr-only">Title</label>
         <input type="text" id="title" name="title" class="form-control" placeholder="title">
+        <% if @groupy %>
         <label for="body" class="sr-only">Meme</label>
         <input type="text" id="body" name="body" class="form-control" placeholder="post">
-
+        <% end %>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Post Meme</button>
       </form>
       <img id="memeImg">
