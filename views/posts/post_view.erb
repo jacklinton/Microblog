@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Account Profile</title>
+    <title>Post View</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +20,7 @@
     <link href="/bootstrap-3.3.7/docs/examples/signin/signin.css" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/steganography.js"></script>
  </head>
 
   <body>
@@ -28,6 +29,7 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
+          <% @current_user = User.find(session[:user_id]) %>
           <% if session[:user_id] %>
             <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
             <a class="blog-nav-item" href="#">Make New Post</a>
@@ -42,26 +44,46 @@
     </div>
 
     <div class="container">
-      <div class = "profile-main" id= "profile-main">
-        <%= flash[:notice] if flash[:notice] %>
-        <% @current_user = User.find(session[:user_id]) %>
-        <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
-        <h1 class="profile-title"><%= @current_user.username%></h1>
-        <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
-      </div>
-      <form class="form-signin" action="/users/edit" method="POST">
-        <h2 class="form-signin-heading">Edit Account Details</h2>
-        <label for="username" class="sr-only">Pick A Username</label>
-        <input type="text" id="username" class="form-control" placeholder="<%= @current_user.username%>" required autofocus>
-      	<label for="password" class="sr-only">Password (Case Sensitive)</label>
-        <input type="text" id="password" class="form-control" placeholder="password" required autofocus>
-        <label for="group_name" class="sr-only">Group(Leave Blank)</label>
-        <input type="text" id="group_name" class="form-control" placeholder="group name (optional)">
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-      </form>
+      <div class="row">
 
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+
+            <div class = "profile-main" id= "profile-main">
+              <div class="p-avatar" ><img src="<%=@post.user.avatar%>"  id="p-avatar"></div>
+              <h1 class="post-title">Post by <%= @post.user.username%></h1>
+              <h1 class="post-title">Title: <%= @post.title%></h1>
+              <img class ="" src="<%= @post.meme %>">
+              <p id = "secret"><script type="text/javascript">document.getElementById("secret").value = steg.decode("<$= @post.meme%>");</script></p>
+            </div>
+
+            <% if @post.user_id == session[:user_id]%>
+
+            <form class="form-signin" action="/posts" method="POST">
+              <h2 class="form-signin-heading">Edit your Meme</h2>
+              
+              <label for="memeUrl" class="sr-only">Link to the Meme</label>
+              <input type="text" id="memeUrl" name="memeUrl" class="form-control" placeholder="URL here" required autofocus>
+              <% if @post.user.group_id %>
+            	 <label for="secret" class="sr-only">Secret Message</label>
+              <% end %> 
+              <input type="text" id="secret" name="secret" class="form-control" placeholder="secret" required autofocus>
+              <label for="title" class="sr-only">Title</label>
+              <input type="text" id="title" name="title" class="form-control" placeholder="title">
+              <label for="body" class="sr-only">Meme</label>
+              <input type="text" id="body" name="body" class="form-control" placeholder="post">
+
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Edit Post</button>
+            </form>
+            <button class="btn btn-lg btn-primary btn-block" type="button"><a href="posts/delete/<%= @post.id %>" >delete</a></button> 
+            <% end %>
+        </div>
+      </div>    
     </div> <!-- /container -->
+    
+    <script type="text/javascript" src="/scripts.js"></script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

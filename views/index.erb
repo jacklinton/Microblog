@@ -27,12 +27,12 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
           <% if session[:user_id] %>
-            <a class="blog-nav-item" href="/users/profile">View <%= @current_user.username%>'s Profile</a>
+            <a class="blog-nav-item" href="/users/profile">View <%= @current_user.username %>'s Profile</a>
             <a class="blog-nav-item" href="/post/new">Make New Post</a>
             <a class="blog-nav-item" href="/log/out">Sign Out</a>
-            <% if @groupy %>
-              <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
-            <% end %>
+           
+              <a class="blog-nav-item" href="/group/profile"><%= @gname.name %> Group Page</a>
+            
           <% else %>
             <a class="blog-nav-item" href="/sign/in">Sign-In</a>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
@@ -47,7 +47,9 @@
         <h1 class="blog-title">MEME-A-DAY</h1>
         <p class="lead blog-description">Post your favorite meme of the day to the feed!</p>
       </div>
-      <%= flash[:notice] if flash[:notice]  %>
+     
+      <h2 style="color:red;font-weight:bold;"><%= flash[:notice] if flash[:notice]  %></h2>
+      
       <div class="row">
 
         <div class="col-sm-8 blog-main">
@@ -59,12 +61,12 @@
         <li>
           <% user = User.find(post.user_id) %> 
           <%= user.username %>:
-        <a href="posts/<%= post.id %>">
+        <a href="posts/edit/<%= post.id %>">
           
           <%=post.title%>
           <br>
           <br>
-          <img src="data:<%=post.meme %>">
+          <img src="<%=post.meme %>">
           <br>
           <br>
         </a> | <a href="posts/delete/<%= post.id %>" >delete</a></li>

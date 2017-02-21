@@ -27,8 +27,8 @@ def page_stuff
 		@current_user = User.find(session[:user_id])
 		
 		if @current_user.group_id
-			@groupie = true
-			@gname = Group.find(@current_user.group_id)
+			@groupie = 
+			@gname = Group.where(id: @current_user.group_id).first
 		end
 
 	end
@@ -45,8 +45,8 @@ get "/" do
 		@current_user = User.find(session[:user_id])
 		
 		if @current_user.group_id
-		@groupie = true
-		@gname = Group.find(@current_user.group_id)
+			@groupie = true
+			@gname = Group.where(id: @current_user.group_id).first
 		end
 
 	end
@@ -89,7 +89,8 @@ post "/users/new" do
 	user.group_name = params[:group_name]
 	
 	if params[:group_name]
-		user.group_id = Group.find(params[:group_name])
+		group = Group.where(name: user.group_name).first
+		user.group_id = group.id
 	end
 
 	user.save
@@ -162,6 +163,7 @@ get "/post/new" do
 
 	erb :"posts/post"
 end
+
 post "/posts" do
 	# or Post.create(title: params["title"], body: params["body"])
 
@@ -181,7 +183,7 @@ end
 get '/posts/edit/:id' do
   @post = Post.find(params[:id])
 
-  erb :post_edit
+  erb :"posts/post_view"
 end
 
 post '/posts/edit/:id' do

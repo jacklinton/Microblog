@@ -1,5 +1,5 @@
 var msg = document.getElementById("secret")
-var msgv = document.getElementById("secret").value
+var msgv
 var img = document.getElementById("memeImg")
 var iurl = document.getElementById("memeUrl")
 var imgurl = document.getElementById("memeImg")
@@ -14,6 +14,6 @@ msg.addEventListener("change", function(){
 	return msgv
 })
 
-msg.addEventListener("change", function(){
+msg.addEventListener("focusout", function(){
 	document.getElementById("body").setAttribute("value", steg.encode(msgv, imgurl))
 })
