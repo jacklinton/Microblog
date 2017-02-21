@@ -38,4 +38,28 @@
 .form-signin-heading {
 	text-align: center;
 }
+
+body {
+	background-color: black;
+	color: yellow;
+}
+
+.blog-nav, .blog-masthead, .blog-footer {
+	background-color: yellow;
+	color: black !important;
+
+}
+
+.blog-nav-item {
+	color: black;
+}
+
+.sidebar-module {
+	background-color: orange;
+}
+
+.jumbotron {
+	background-image: url("/rsz_nyan_cat_wide-672x372.jpg");
+	background-position: 170px;
+}
 /*# sourceMappingURL=styles.css.map */
