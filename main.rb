@@ -199,7 +199,7 @@ end
 
 #Deleting a post
 get "/posts/delete/:id" do
-	session.clear
+
 	post = Post.find(params[:id])
 
 	if session[:user_id] == post.user_id
