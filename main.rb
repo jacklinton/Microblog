@@ -50,22 +50,7 @@ end
 
 #View this user's profile
 get "/users/profile" do
-	render :rabl, :foo, :format => "json"
-	@posts = Post.all
-	@users = User.all
-	@groups = Group.all
-	@i = 1
-
-	if session[:user_id]
-		@current_user = User.find(session[:user_id])
-		
-		if @current_user.group_id
-			@groupie = true
-			@gname = Group.where(id: @current_user.group_id).first
-		end
-
-	end
-
+	
 	erb :"users/user"
 end
 #View group profile
@@ -77,22 +62,7 @@ end
 ## User related actions
 # Creating a new user
 get "/users/new" do
-	render :rabl, :foo, :format => "json"
-	@posts = Post.all
-	@users = User.all
-	@groups = Group.all
-	@i = 1
-
-	if session[:user_id]
-		@current_user = User.find(session[:user_id])
-		
-		if @current_user.group_id
-			@groupie = true
-			@gname = Group.where(id: @current_user.group_id).first
-		end
-
-	end
-
+	
 
 	erb :"register/registration"
 end
@@ -128,22 +98,6 @@ get "/sign/in" do
 end
 
 post "/log/in" do
-	render :rabl, :foo, :format => "json"
-	@posts = Post.all
-	@users = User.all
-	@groups = Group.all
-
-	if session[:user_id]
-		@current_user = User.find(session[:user_id])
-		
-		if @current_user.group_id
-			@groupie = true
-			@gname = Group.where(id: @current_user.group_id).first
-		end
-
-	end
-
-
 	user = User.where(username: params[:username]).first
 	
 	if user.password == params[:password]
@@ -208,21 +162,7 @@ end
 ##Post related actions
 #Creating a new post
 get "/post/new" do
-	render :rabl, :foo, :format => "json"
-	@posts = Post.all
-	@users = User.all
-	@groups = Group.all
-
-	if session[:user_id]
-		@current_user = User.find(session[:user_id])
-		
-		if @current_user.group_id
-			@groupie = true
-			@gname = Group.where(id: @current_user.group_id).first
-		end
-
-	end
-
+	
 
 	erb :"posts/post"
 end
@@ -252,22 +192,7 @@ end
 #Editing a post
 get '/posts/edit/:id' do
   @post = Post.find(params[:id])
-  render :rabl, :foo, :format => "json"
-	@posts = Post.all
-	@users = User.all
-	@groups = Group.all
-	@i = 1
-
-	if session[:user_id]
-		@current_user = User.find(session[:user_id])
-		
-		if @current_user.group_id
-			@groupie = true
-			@gname = Group.where(id: @current_user.group_id).first
-		end
-
-	end
-
+  
 
   erb :"posts/post_view"
 end

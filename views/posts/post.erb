@@ -60,7 +60,7 @@
         <% end %>
         <label for="title" class="sr-only">Title</label>
         <input type="text" id="title" name="title" class="form-control" placeholder="title">
-        <% if @post.user.group_id %>
+        <% if @current_user.group_name == "twentyseventeam" %>
         <label for="body" class="sr-only">Meme</label>
         <input type="text" id="body" name="body" class="form-control" placeholder="post">
         <% end %>
