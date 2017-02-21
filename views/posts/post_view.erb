@@ -33,8 +33,8 @@
           <% if session[:user_id] %>
             <a class="blog-nav-item profile-title" href="/users/profile">View <%= @current_user.username%>'s Profile</a>
             <a class="blog-nav-item" href="/post/new">Make New Post</a>
-            <% if @groupy %>
-            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% if @current_user.group_name == "twentyseventeam" %>
+            <a class="blog-nav-item" href="#"><%= @current_user.group_name %> Group Page</a>
             <% end %>
           <% else %>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>

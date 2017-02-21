@@ -45,7 +45,7 @@
       <div class="jumbotron">
         <div class="blog-header">
         <h1 class="blog-title">MEME-A-DAY</h1>
-        <p class="lead blog-description">Post your favorite meme of the day to the feed!</p>
+        
         </div>
       </div>
       
@@ -58,39 +58,37 @@
 
           <div class="blog-post">
             <h1 style="color: orange;">Most Recent Posts</h1>
-    <ul>
-      
-        <% @posts.each do |post| %>
-          <li>
-            <% user = User.find(post.user_id) %>
-          <a href="user/profile/"> 
-            <%= user.username %>:</a>  
+            <ul>
+              
+                <% @posts.each do |post| %>
+                  <li>
+                    <% user = User.find(post.user_id) %>
+                  <a href="user/profile/"> 
+                    <%= user.username %>:</a>  
 
-          <a href="posts/edit/<%= post.id %>">
-            
-            <%=post.title%>
-            <br>
-            <br>
-            <img src="<%=post.meme %>">
-            <br>
-            <br>
-          </a> | <a href="">Add a comment</a> | <a href="posts/delete/<%= post.id %>" >delete</a></li>
-          <% @i += 1 %>
-          <% if @i == 10 %>
-            <% break %>
-          <% end %>
-        <%end%>
+                  <a href="posts/edit/<%= post.id %>">
+                    
+                    <%=post.title%>
+                    <br>
+                    <br>
+                    <img src="<%=post.meme %>">
+                    <br>
+                    <br>
+                  </a> | <a href="">Add a comment</a> | <a href="posts/delete/<%= post.id %>" >delete</a>
+                  <br>
+                  <br>
+                  <br>
+                  </li>
+                  <% @i += 1 %>
+                  <% if @i == 10 %>
+                    <% break %>
+                  <% end %>
+                <%end%>
 
-    </ul>
+            </ul>
           </div><!-- /.blog-post -->
 
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
-
+          
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -115,14 +113,7 @@
               <li><a href="#">April 2013</a></li>
             </ol>
           </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-            </ol>
-          </div>
+          
         </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->

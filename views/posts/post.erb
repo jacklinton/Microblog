@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/bootstrap-3.3.7/docs/favicon.ico">
 
-    <title>Account Profile</title>
+    <title>New Post</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,6 @@
  </head>
 
   <body>
-
   	<div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
@@ -33,8 +32,8 @@
           <% if session[:user_id] %>
             <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
             <a class="blog-nav-item" href="#">Make New Post</a>
-            <% if @groupy %>
-            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% if @current_user.group_name == "twentyseventeam" %>
+              <a class="blog-nav-item" href="#"><%= @current_user.group_name %> Group Page</a>
             <% end %>
           <% else %>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
@@ -47,21 +46,21 @@
       <div class = "profile-main" id= "profile-main">
         <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
         <h1 class="profile-title"><%= @current_user.username%></h1>
-        <% if @groupy %>
-        <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
+        <% if @current_user.group_name == "twentyseventeam" %>
+          <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
         <% end %>
       </div>
       <form class="form-signin" action="/posts" method="POST">
         <h2 class="form-signin-heading">Post a Meme</h2>
         <label for="memeUrl" <!-- class="sr-only" -->>Link to the Meme</label>
         <input type="text" id="memeUrl" name="memeUrl" class="form-control" placeholder="URL here" required autofocus>
-      	<% if @groupy %>
+      	<% if @current_user.group_name == "twentyseventeam" %>
         <label for="secret" <!-- class="sr-only" -->>Secret Message</label>
         <input type="text" id="secret" name="secret" class="form-control" placeholder="secret" required autofocus>
         <% end %>
         <label for="title" class="sr-only">Title</label>
         <input type="text" id="title" name="title" class="form-control" placeholder="title">
-        <% if @groupy %>
+        <% if @post.user.group_id %>
         <label for="body" class="sr-only">Meme</label>
         <input type="text" id="body" name="body" class="form-control" placeholder="post">
         <% end %>

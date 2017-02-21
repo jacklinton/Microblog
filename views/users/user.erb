@@ -29,10 +29,11 @@
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
           <% if session[:user_id] %>
+            <% @current_user = User.find(session[:user_id]) %>
             <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
             <a class="blog-nav-item" href="/post/new">Make New Post</a>
-            <% if @groupy %>
-            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
+            <% if @current_user.group_name == "twentyseventeam" %>
+              <a class="blog-nav-item" href="#"><%= @current_user.group_name %> Group Page</a>
             <% end %>
           <% else %>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
@@ -47,7 +48,7 @@
         <% @current_user = User.find(session[:user_id]) %>
         <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
         <h1 class="profile-title"><%= @current_user.username%></h1>
-        <% if @groupy %>
+        <% if @current_user.group_name == "twentyseventeam" %>
         <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
         <% end %>
       </div>

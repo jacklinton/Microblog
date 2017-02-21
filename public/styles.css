@@ -50,6 +50,10 @@ body {
 
 }
 
+.blog-description {
+	color: black;
+}
+
 .blog-nav-item {
 	color: black;
 }
@@ -59,6 +63,7 @@ body {
 }
 
 .jumbotron {
+	margin-top: 40px;
 	background-image: url("/rsz_nyan_cat_wide-672x372.jpg");
 	background-position: 170px;
 }
