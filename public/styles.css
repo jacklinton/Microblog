@@ -14,9 +14,14 @@
 	border-style: solid;
 	border-width: 3px;
 	float: left;
-	position: relative;
+	position: absolute;
 	top: 10%;
 	align-self: center;
+}
+
+#p-avatar {
+	width: 100%;
+	height: auto;
 }
 
 .post-title {
@@ -24,5 +29,9 @@
 	font-weight: bold !important;
 	font-family: Courier !important;
 
+}
+
+.form-signin-heading {
+	text-align: center;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -137,25 +137,44 @@ end
 get "/users/view/:id" do
 	profile =  User.find(:id)
 
-	redirect "/users/profile/#{profile.username}"
+	erb :"users/user"
 end
 
-#Editing a user's profile
-get "users/edit/" do
-	profile = User.find(:username)
-
-	if session[:user_id] == profile.user_id
-		redirect "users/profile/edit/#{profile.username}"
-	else
-		flash[:notice] = "You only have permission to delete your own posts."
-	end
-
+#Editing this user's profile
+post "/users/edit/avatar/:id" do
+	user = User.find(params[:id])
+	user.avatar = params[:avatar]
+	user.save
+	redirect "users/profile"
 end
 
+post "/users/edit/username/:id" do
+	user = User.find(params[:id])
+	user.avatar = params[:avatar]
+	user.save
+	redirect "/users/profile"
+end
 
+post "/users/edit/password/:id" do
+	user = User.find(params[:id])
+	user.avatar = params[:avatar]
+	user.save
+	redirect "/users/profile"
+end
 
+post "/users/edit/group/:id" do
+	user = User.find(params[:id])
+	user.avatar = params[:avatar]
+	user.save
+	redirect "users/profile"
+end
 
-
+post "/users/edit/avatar/:id" do
+	user = User.find(params[:id])
+	user.avatar = params[:avatar]
+	user.save
+	redirect "users/profile"
+end
 
 ##Post related actions
 #Creating a new post

@@ -43,22 +43,40 @@
 
     <div class="container">
       <div class = "profile-main" id= "profile-main">
-        <%= flash[:notice] if flash[:notice] %>
+        <h2 style="color: red;"><%= flash[:notice] if flash[:notice] %></h2>
         <% @current_user = User.find(session[:user_id]) %>
         <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
         <h1 class="profile-title"><%= @current_user.username%></h1>
         <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
       </div>
-      <form class="form-signin" action="/users/edit" method="POST">
-        <h2 class="form-signin-heading">Edit Account Details</h2>
-        <label for="username" class="sr-only">Pick A Username</label>
-        <input type="text" id="username" class="form-control" placeholder="<%= @current_user.username%>" required autofocus>
-      	<label for="password" class="sr-only">Password (Case Sensitive)</label>
-        <input type="text" id="password" class="form-control" placeholder="password" required autofocus>
-        <label for="group_name" class="sr-only">Group(Leave Blank)</label>
-        <input type="text" id="group_name" class="form-control" placeholder="group name (optional)">
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <h2 class="form-signin-heading">Edit Account Details</h2>
+      <form class="form-signin" action="/users/edit/avatar/<%=@current_user.id%>" method="POST">
+        <label for="avatar" class="sr-only">Pick An Avatar</label>
+        <input type="text" id="avatar" name="avatar" class="form-control" placeholder="Enter url of avatar image here"  autofocus>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Change Avatar</button>
+      </form>
+
+      <form class="form-signin" action="/users/edit/username/<%=@current_user.id%>" method="POST">
+        <label for="username" class="sr-only">Pick A Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="<%= @current_user.username%>"  autofocus>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Change Username</button>
+      </form>
+
+      <form class="form-signin" action="/users/edit/password/<%=@current_user.id%>" method="POST">
+      	<label for="password" class="sr-only">Password (Case Sensitive)</label>
+        <input type="text" id="password" class="form-control" name="password" placeholder="password"  autofocus>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+      </form>
+
+      <form class="form-signin" action="/users/edit/group/<%=@current_user.id%>" method="POST">
+        <label for="group_name" class="sr-only">Group(Leave Blank)</label>
+        <input type="text" id="group_name" name="group_name" class="form-control" placeholder="group name (optional)">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Change Group</button>
       </form>
 
     </div> <!-- /container -->
