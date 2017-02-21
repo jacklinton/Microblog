@@ -55,8 +55,9 @@
               <div class="p-avatar" ><img src="<%=@post.user.avatar%>"  id="p-avatar"></div>
               <h1 class="post-title">Post by <%= @post.user.username%></h1>
               <h1 class="post-title">Title: <%= @post.title%></h1>
-              <img class ="" src="<%= @post.meme %>">
-              <p id = "secret"><script type="text/javascript">document.getElementById("secret").innerHTML = steg.decode("<$= @post.meme%>");</script></p>
+              <img class ="" id = "image" src="<%= @post.meme %>">
+              <h1 id = "secret">!</h1>
+              <script type="text/javascript"> var image = document.getElementById("image").src; document.getElementById("secret").innerHTML = "Secret message: " + steg.decode(image);</script>
             </div>
 
             <% if @post.user_id == session[:user_id]%>

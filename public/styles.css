@@ -5,8 +5,12 @@
 	text-align: center !important;
 }
 
-.p-avatar {
+.profile-main {
 	display: block;
+}
+
+.p-avatar {
+	display: inline-block;
 	width: 150px;
 	heigh: 200px;
 	background: white;
@@ -14,9 +18,9 @@
 	border-style: solid;
 	border-width: 3px;
 	float: left;
-	position: absolute;
+	position: relative;
 	top: 10%;
-	align-self: center;
+	margin-right: 20px;
 }
 
 #p-avatar {
