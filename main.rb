@@ -40,6 +40,7 @@ get "/" do
 	@posts = Post.all
 	@users = User.all
 	@groups = Group.all
+	@i = 1
 
 	if session[:user_id]
 		@current_user = User.find(session[:user_id])
@@ -88,7 +89,7 @@ post "/users/new" do
 	user.password = params[:password]
 	user.group_name = params[:group_name]
 	
-	if params[:group_name]
+	if params[:group_name] == nil
 		group = Group.where(name: user.group_name).first
 		user.group_id = group.id
 	end
@@ -190,7 +191,13 @@ post "/posts" do
 	post = Post.new
 
 	post.title = params[:title]
-	post.meme = params[:body]
+	
+	if params[:body] == nil
+		post.meme = params[:memeUrl]
+	else
+		post.meme = params[:body]
+	end
+
 	post.user_id = session[:user_id]
 
 	post.save

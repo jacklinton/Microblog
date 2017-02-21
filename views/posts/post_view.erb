@@ -29,14 +29,15 @@
       <div class="container">
         <nav class="blog-nav">
           <a class="blog-nav-item active" href="/">Home</a>
-          <% @current_user = User.find(session[:user_id]) %>
           <% if session[:user_id] %>
-            <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
-            <a class="blog-nav-item" href="#">Make New Post</a>
-            <% if @groupy %>
-            <a class="blog-nav-item" href="#"><%= @gname %> Group Page</a>
-            <% end %>
+            <a class="blog-nav-item" href="/users/profile">View <%= @current_user.username %>'s Profile</a>
+            <a class="blog-nav-item" href="/post/new">Make New Post</a>
+            <a class="blog-nav-item" href="/log/out">Sign Out</a>
+           
+              <a class="blog-nav-item" href="/group/profile"><%= @gname.name %> Group Page</a>
+            
           <% else %>
+            <a class="blog-nav-item" href="/sign/in">Sign-In</a>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
           <% end %>
         </nav>
@@ -56,8 +57,11 @@
               <h1 class="post-title">Post by <%= @post.user.username%></h1>
               <h1 class="post-title">Title: <%= @post.title%></h1>
               <img class ="" id = "image" src="<%= @post.meme %>">
-              <h1 id = "secret">!</h1>
-              <script type="text/javascript"> var image = document.getElementById("image").src; document.getElementById("secret").innerHTML = "Secret message: " + steg.decode(image);</script>
+
+              <%if session[:user_id] and Post.group_id == User.group_id %>
+                <h1 id = "secret">!</h1>
+                <script type="text/javascript"> var image = document.getElementById("image").src; document.getElementById("secret").innerHTML = "Secret message: " + steg.decode(image);</script>
+              <% end %>
             </div>
 
             <% if @post.user_id == session[:user_id]%>

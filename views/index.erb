@@ -30,9 +30,9 @@
             <a class="blog-nav-item" href="/users/profile">View <%= @current_user.username %>'s Profile</a>
             <a class="blog-nav-item" href="/post/new">Make New Post</a>
             <a class="blog-nav-item" href="/log/out">Sign Out</a>
-           
+            <% if @current_user.group_id %>
               <a class="blog-nav-item" href="/group/profile"><%= @gname.name %> Group Page</a>
-            
+            <% end %>
           <% else %>
             <a class="blog-nav-item" href="/sign/in">Sign-In</a>
             <a class="blog-nav-item" href="/users/new">Register New Account</a>
@@ -57,20 +57,28 @@
           <div class="blog-post">
             <h1>Most Recent Posts</h1>
     <ul>
-      <% @posts.each do |post| %>
-        <li>
-          <% user = User.find(post.user_id) %> 
-          <%= user.username %>:
-        <a href="posts/edit/<%= post.id %>">
-          
-          <%=post.title%>
-          <br>
-          <br>
-          <img src="<%=post.meme %>">
-          <br>
-          <br>
-        </a> | <a href="posts/delete/<%= post.id %>" >delete</a></li>
-      <%end%>
+      
+        <% @posts.each do |post| %>
+          <li>
+            <% user = User.find(post.user_id) %>
+          <a href="user/profile/"> 
+            <%= user.username %>:</a>  
+
+          <a href="posts/edit/<%= post.id %>">
+            
+            <%=post.title%>
+            <br>
+            <br>
+            <img src="<%=post.meme %>">
+            <br>
+            <br>
+          </a> | <a href="">Add a comment</a> | <a href="posts/delete/<%= post.id %>" >delete</a></li>
+          <% @i += 1 %>
+          <% if @i == 10 %>
+            <% break %>
+          <% end %>
+        <%end%>
+
     </ul>
           </div><!-- /.blog-post -->
 

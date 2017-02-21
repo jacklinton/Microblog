@@ -47,14 +47,18 @@
       <div class = "profile-main" id= "profile-main">
         <div class="p-avatar" ><img src="<%=@current_user.avatar%>"  id="p-avatar"></div>
         <h1 class="profile-title"><%= @current_user.username%></h1>
+        <% if @groupy %>
         <h2 class="profile-title">Group: <%= @current_user.group_name%></h2>
+        <% end %>
       </div>
       <form class="form-signin" action="/posts" method="POST">
         <h2 class="form-signin-heading">Post a Meme</h2>
         <label for="memeUrl" <!-- class="sr-only" -->>Link to the Meme</label>
         <input type="text" id="memeUrl" name="memeUrl" class="form-control" placeholder="URL here" required autofocus>
-      	<label for="secret" <!-- class="sr-only" -->>Secret Message</label>
+      	<% if @groupy %>
+        <label for="secret" <!-- class="sr-only" -->>Secret Message</label>
         <input type="text" id="secret" name="secret" class="form-control" placeholder="secret" required autofocus>
+        <% end %>
         <label for="title" class="sr-only">Title</label>
         <input type="text" id="title" name="title" class="form-control" placeholder="title">
         <label for="body" class="sr-only">Meme</label>
