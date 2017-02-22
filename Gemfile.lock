@@ -20,6 +20,7 @@ GEM
     i18n (0.8.0)
     minitest (5.10.1)
     oj (2.18.1)
+    pg (0.19.0)
     rabl (0.13.1)
       activesupport (>= 2.3.14)
     rack (1.6.5)
@@ -40,6 +41,7 @@ GEM
       sinatra (>= 1.0.0)
     sinatra-outputbuffer (0.1.0)
       sinatra (>= 1.0.a)
+    sqlite3 (1.3.13)
     thread_safe (0.3.5)
     tilt (2.0.6)
     tzinfo (1.2.2)
@@ -53,11 +55,13 @@ DEPENDENCIES
   builder
   gon-sinatra
   oj
+  pg
   rabl
   rake
   sinatra-activerecord
   sinatra-bootstrap
   sinatra-flash
+  sqlite3
 
 BUNDLED WITH
    1.14.5
