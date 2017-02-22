@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/bootstrap-3.3.7/docs/favicon.ico">
+    <link rel="icon" href="//social_balloon-21.png">
 
     <title>New Post</title>
 
@@ -31,7 +31,7 @@
           <% @current_user = User.find(session[:user_id]) %>
           <% if session[:user_id] %>
             <h4 class="blog-nav-item profile-title">View <%= @current_user.username%>'s Profile</h4>
-            <a class="blog-nav-item" href="#">Make New Post</a>
+            <a class="blog-nav-item" href="/post/new">Make New Post</a>
             <% if @current_user.group_name == "twentyseventeam" %>
               <a class="blog-nav-item" href="#"><%= @current_user.group_name %> Group Page</a>
             <% end %>
