@@ -13,7 +13,7 @@ Sinatra::register Gon::Sinatra::Rabl
 
 
 
-set :database, "sqlite3:microblog.sqlite3"
+configure(:development){set :database, "sqlite3:blog.sqlite3"}
 
 enable :sessions
 
