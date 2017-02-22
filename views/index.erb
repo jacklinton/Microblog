@@ -81,7 +81,9 @@
                       <% if comment.post_id == post.id %>
                       <li>
                         <p><%= comment.body %>: <%= comment.user.username %></p>
+                        <% if session[:user_id] == comment.user.id %>
                         <a href="comments/delete/<%= comment.id %>">delete comment</a>
+                        <% end %>
                       </li>
                    </ul>
                       
