@@ -26,6 +26,7 @@ get "/" do
 	@posts = Post.all
 	@users = User.all
 	@groups = Group.all
+	@comments = Comment.all
 	@i = 1
 
 	if session[:user_id]
@@ -219,6 +220,28 @@ get "/posts/delete/:id" do
 		flash[:notice] = "You only have permission to delete your own posts."
 	end
 	
+	redirect "/"
+end
+
+##Comment related actions
+#Adding a new comment
+post "/comment/add/:post_id/:user_id" do
+	
+	comment = Comment.new
+	comment.post_id = params[:post_id]
+	comment.user_id = params[:user_id]
+	comment.body = params[:comment]
+
+	comment.save
+
+	redirect "/"
+end
+
+#Deleting a comment
+get "/comments/delete/:id" do
+	comment = Comment.find(params[:id])
+
+	comment.destroy
 	redirect "/"
 end
 

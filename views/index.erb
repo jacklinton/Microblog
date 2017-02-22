@@ -74,7 +74,28 @@
                     <img src="<%=post.meme %>">
                     <br>
                     <br>
-                  </a> | <a href="">Add a comment</a> | <a href="posts/delete/<%= post.id %>" >delete</a>
+                  </a> | <a href="posts/delete/<%= post.id %>" >delete post</a>
+
+                  <ul>
+                    <% @comments.each do |comment| %>
+                      <% if comment.post_id == post.id %>
+                      <li>
+                        <p><%= comment.body %>: <%= comment.user.username %></p>
+                        <a href="comments/delete/<%= comment.id %>">delete comment</a>
+                      </li>
+                   </ul>
+                      
+                      <% end %>
+                  <% end %>
+                  <% if session[:user_id] %>
+                      <form action="comment/add/<%= post.id%>/<%=session[:user_id]%>" method="post">
+                        <label for="comment"></label>
+                        <input type="text" id="comment" name="comment" placeholder="comment"> 
+                        <button class="btn btn-small" type="submit">Submit Comment</button> 
+                      </form> 
+                    <% end %>
+                     
+                  
                   <br>
                   <br>
                   <br>
